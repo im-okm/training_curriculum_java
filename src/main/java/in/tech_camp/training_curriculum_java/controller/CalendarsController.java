@@ -29,7 +29,8 @@ public class CalendarsController {
   @GetMapping("/")
   public String index(Model model) {
     model.addAttribute("planForm", new PlanForm());
-    List<Map<String, Object>> weekDays = get_week();
+    List<Map<String, Object>> weekDays = getWeek();
+    // List<Map<String, Object>> weekDays = get_week(); //スネークケースをキャメルケースに書き換え
     model.addAttribute("weekDays", weekDays);
     return "calendars/index";
   }
@@ -43,10 +44,12 @@ public class CalendarsController {
       newPlan.setPlan(planForm.getPlan());
       planRepository.insert(newPlan);
     }
-    return "redirect:/calendars";
+    return "redirect:/";
+    // return "redirect:/calendars";　Issue4で修正
   }
 
-  private List<Map<String, Object>> get_week() {
+  private List<Map<String, Object>> getWeek() {
+  // private List<Map<String, Object>> get_week() { //スネークケースをキャメルケースに書き換え
     List<Map<String, Object>> weekDays = new ArrayList<>();
 
     LocalDate todaysDate = LocalDate.now();
@@ -70,6 +73,7 @@ public class CalendarsController {
       dayMap.put("month", currentDate.getMonthValue());
       dayMap.put("date", currentDate.getDayOfMonth());
       dayMap.put("plans", todayPlans);
+      dayMap.put("weekday", wdays[currentDate.getDayOfWeek().getValue() % 7]); //Issue6で追加
 
       weekDays.add(dayMap);
     }
