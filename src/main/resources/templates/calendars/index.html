@@ -22,7 +22,8 @@
       <div th:each="day : ${weekDays}">
         <div class="item">
           <div class="date">
-            <span th:text="${day.month} + '/' + ${day.date}"></span>
+            <span th:text="${day.month} + '/' + ${day.date} + ${day.weekday}"></span>
+            <!-- <span th:text="${day.month} + '/' + ${day.date}"></span> Issue6で修正-->
             <!-- <span th:text="'/'"></span> Issue5で修正 -->
           </div>
           <ul class="content">

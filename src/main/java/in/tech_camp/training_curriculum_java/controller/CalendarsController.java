@@ -73,6 +73,7 @@ public class CalendarsController {
       dayMap.put("month", currentDate.getMonthValue());
       dayMap.put("date", currentDate.getDayOfMonth());
       dayMap.put("plans", todayPlans);
+      dayMap.put("weekday", wdays[currentDate.getDayOfWeek().getValue() % 7]); //Issue6で追加
 
       weekDays.add(dayMap);
     }
